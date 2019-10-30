@@ -1,4 +1,5 @@
 ﻿using BlogSystem.BLL;
+using BolgSystemMVCSite.Fillters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,18 +11,19 @@ namespace BolgSystemMVCSite.Controllers
 {
     public class HomeController : Controller
     {
+        [BlogSystemAuth]
         public ActionResult Index()
         {
             return View();
         }
-
+        [BlogSystemAuth]
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
 
             return View();
         }
-
+        [BlogSystemAuth]
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
@@ -54,7 +56,8 @@ namespace BolgSystemMVCSite.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task< ActionResult> Login(Models.UserViewModels.LoginViewModel model)
+        [BlogSystemAuth]
+        public  ActionResult Login(Models.UserViewModels.LoginViewModel model)
         {
             if (ModelState.IsValid)
             {

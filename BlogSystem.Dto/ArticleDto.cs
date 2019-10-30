@@ -24,6 +24,6 @@ namespace BlogSystem.Dto
         /// 标签
         /// </summary>
         public string[] CategoryNames { get; set; }
-        public string[] CategoryIds { get; set; }
+        public Guid[] CategoryIds { get; set; }
     }
 }

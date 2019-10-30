@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BlogSyster.DAL
 {
-   public class ArticleToCategory:BaseService<BlogSystem.ArtcleToCategory>, IArticleToCategory
+   public class ArticleToCategory:BaseService<BlogSystem.ArtcleToCategory>, IArticleToCategoryService
     {
         public ArticleToCategory():base(new BlogSystem.BlogContent())
         {

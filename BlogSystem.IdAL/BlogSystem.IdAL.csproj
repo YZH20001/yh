@@ -52,7 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IArticleService.cs" />
-    <Compile Include="IArticleToCategory.cs" />
+    <Compile Include="IArticleToCategoryService.cs" />
     <Compile Include="IBaseServices.cs" />
     <Compile Include="IBlogCategory.cs" />
     <Compile Include="IUserService.cs" />

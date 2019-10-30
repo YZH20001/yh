@@ -4,6 +4,7 @@ using BlogSystem.IdAL;
 using BlogSyster.DAL;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,8 +36,6 @@ namespace BlogSystem.BLL
                         }, saved: false);
                     }
                     await articleToCategory.Save();
-
-
                 }
             }
         }
@@ -73,14 +72,44 @@ namespace BlogSystem.BLL
             throw new NotImplementedException();
         }
 
-        public Task<List<ArticleDto>> GetAllArticlesByuserId(Guid userId)
+        public async Task<List<ArticleDto>> GetAllArticlesByuserId(Guid userId)
         {
-            throw new NotImplementedException();
+            using (var articleSvc = new ArticleService())
+            {
+              var list= await articleSvc.GetAllAsync().Include(m=>m.User). Where(m => m.UseId == userId).Select(m=>new Dto.ArticleDto()
+              {
+                  Title=m.Title,
+                  BadCount=m.BadCount,
+                  GoodCount=m.GoodCount,
+                  Content=m.Content,
+                  Email=m.User.Email,
+                  CreateTime=m.CreateTime,
+                  Id=m.Id,
+                  ImagePath= m.User.ImagePath,
+              }
+              ).ToListAsync();
+                using(IArticleToCategoryService articleToCategoryService=new ArticleToCategory())
+                {
+                    foreach (var elem in list)
+                    {
+                        var cates = await articleToCategoryService.GetAllAsync().Include(m=>m.BlogCategory).Where(m => m.ArticleId == elem.Id).ToListAsync();
+                        elem.CategoryIds = cates.Select(m => m.BlogCategoryId).ToArray();
+                        elem.CategoryNames = cates.Select(m => m.BlogCategory.CategoryName).ToArray();
+                    }
+                    return list;
+                }
+            }
         }
-
-        public Task<List<BlogCategoryDto>> GetAllCategories(Guid userId)
+        public async Task<List<BlogCategoryDto>> GetAllCategories(Guid userId)
         {
-            throw new NotImplementedException();
+            using (IdAL.IBlogCategory blogCategory = new BlogCategoryServices())
+            {
+                return await blogCategory.GetAllAsync().Where(m => m.UserId == userId).Select(m => new BlogCategoryDto()
+                {
+                    Id = m.Id,
+                    CategoryName = m.CategoryName
+                }).ToListAsync();
+            }
         }
 
         public Task RemoveArticle(Guid articleId)
