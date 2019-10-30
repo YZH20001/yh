@@ -1,0 +1,48 @@
+﻿body {
+    margin: 0;
+    padding: 0;
+    overflow-y:hidden;
+}
+
+.body-content {
+    width: 100%;
+    padding: 0;
+}
+
+hr {
+    border: 0;
+}
+h2{
+    text-align:center;
+}
+#wrap {
+    width: 31%;
+    margin: 275px auto;
+}
+
+img {
+    width: 100%;
+}
+
+#bg_wrap {
+    position: relative;
+    top: -812px;
+    z-index: -10;
+}
+
+ #bg_wrap > div {
+     width: 100%;
+     opacity: 0;
+     position: absolute;
+ }
+
+#bg_wrap > div:nth-child(1) {
+        opacity: 1;
+  }
+.regieter_box {
+    position: relative;
+    left: 52px;
+}
+.col-md-offset-2 {
+    padding-left: 115px;
+}

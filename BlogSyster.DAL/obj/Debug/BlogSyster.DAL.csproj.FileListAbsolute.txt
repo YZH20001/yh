@@ -1,0 +1,16 @@
+E:\ASP.NET MVC5\BlogSystem\BlogSyster.DAL\bin\Debug\BlogSyster.DAL.dll
+E:\ASP.NET MVC5\BlogSystem\BlogSyster.DAL\bin\Debug\BlogSyster.DAL.pdb
+E:\ASP.NET MVC5\BlogSystem\BlogSyster.DAL\bin\Debug\BlogSystem.dll
+E:\ASP.NET MVC5\BlogSystem\BlogSyster.DAL\bin\Debug\BlogSystem.IdAL.dll
+E:\ASP.NET MVC5\BlogSystem\BlogSyster.DAL\bin\Debug\EntityFramework.dll
+E:\ASP.NET MVC5\BlogSystem\BlogSyster.DAL\bin\Debug\EntityFramework.SqlServer.dll
+E:\ASP.NET MVC5\BlogSystem\BlogSyster.DAL\bin\Debug\BlogSystem.IdAL.pdb
+E:\ASP.NET MVC5\BlogSystem\BlogSyster.DAL\bin\Debug\BlogSystem.IdAL.dll.config
+E:\ASP.NET MVC5\BlogSystem\BlogSyster.DAL\bin\Debug\BlogSystem.pdb
+E:\ASP.NET MVC5\BlogSystem\BlogSyster.DAL\bin\Debug\BlogSystem.dll.config
+E:\ASP.NET MVC5\BlogSystem\BlogSyster.DAL\bin\Debug\EntityFramework.xml
+E:\ASP.NET MVC5\BlogSystem\BlogSyster.DAL\bin\Debug\EntityFramework.SqlServer.xml
+E:\ASP.NET MVC5\BlogSystem\BlogSyster.DAL\obj\Debug\BlogSyster.DAL.csprojAssemblyReference.cache
+E:\ASP.NET MVC5\BlogSystem\BlogSyster.DAL\obj\Debug\BlogSyster.DAL.csproj.CopyComplete
+E:\ASP.NET MVC5\BlogSystem\BlogSyster.DAL\obj\Debug\BlogSyster.DAL.dll
+E:\ASP.NET MVC5\BlogSystem\BlogSyster.DAL\obj\Debug\BlogSyster.DAL.pdb

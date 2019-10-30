@@ -1,0 +1,16 @@
+E:\ASP.NET MVC5\BlogSystem\BlogSystem.IBLL\bin\Debug\BlogSystem.IBLL.dll
+E:\ASP.NET MVC5\BlogSystem\BlogSystem.IBLL\bin\Debug\BlogSystem.IBLL.pdb
+E:\ASP.NET MVC5\BlogSystem\BlogSystem.IBLL\bin\Debug\BlogSystem.Dto.dll
+E:\ASP.NET MVC5\BlogSystem\BlogSystem.IBLL\bin\Debug\BlogSystem.IdAL.dll
+E:\ASP.NET MVC5\BlogSystem\BlogSystem.IBLL\bin\Debug\BlogSystem.dll
+E:\ASP.NET MVC5\BlogSystem\BlogSystem.IBLL\bin\Debug\EntityFramework.dll
+E:\ASP.NET MVC5\BlogSystem\BlogSystem.IBLL\bin\Debug\BlogSystem.Dto.pdb
+E:\ASP.NET MVC5\BlogSystem\BlogSystem.IBLL\bin\Debug\BlogSystem.IdAL.pdb
+E:\ASP.NET MVC5\BlogSystem\BlogSystem.IBLL\bin\Debug\BlogSystem.IdAL.dll.config
+E:\ASP.NET MVC5\BlogSystem\BlogSystem.IBLL\bin\Debug\BlogSystem.pdb
+E:\ASP.NET MVC5\BlogSystem\BlogSystem.IBLL\bin\Debug\BlogSystem.dll.config
+E:\ASP.NET MVC5\BlogSystem\BlogSystem.IBLL\bin\Debug\EntityFramework.xml
+E:\ASP.NET MVC5\BlogSystem\BlogSystem.IBLL\obj\Debug\BlogSystem.IBLL.csprojAssemblyReference.cache
+E:\ASP.NET MVC5\BlogSystem\BlogSystem.IBLL\obj\Debug\BlogSystem.IBLL.csproj.CopyComplete
+E:\ASP.NET MVC5\BlogSystem\BlogSystem.IBLL\obj\Debug\BlogSystem.IBLL.dll
+E:\ASP.NET MVC5\BlogSystem\BlogSystem.IBLL\obj\Debug\BlogSystem.IBLL.pdb
