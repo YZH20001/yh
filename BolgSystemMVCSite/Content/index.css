@@ -2,14 +2,21 @@
     margin:0;
     padding:0;
 }
-ul{
-    list-style:none;
-    padding:0;
+ul {
+    list-style: none;
+    padding: 0;
+    user-select:none;
+}
+li {
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
 }
 a {
     text-decoration: none;
     color: black;
 }
+
 .body-content{
     width:100%;
 }
@@ -19,4 +26,33 @@ a {
     height: 500px;
     margin-top: 51px;
     background-color: antiquewhite;
+}
+#sanjiao,
+#sanjiaoarticle {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    float: right;
+    margin-top: 5px;
+    border-top: 10px solid;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+}
+
+.blog {
+    padding:10px;
+    font-size: 25px;
+    font-weight: bold;
+    color: aqua;
+    border-bottom:1px solid black;
+}
+.create {
+    cursor:pointer;
+}
+.showorhidden, 
+#showorhiddenarticle {
+    display: none;
+}
+.borBottom {
+    border-bottom: 1px solid mediumspringgreen;
 }
