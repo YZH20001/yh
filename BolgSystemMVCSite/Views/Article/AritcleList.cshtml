@@ -4,10 +4,10 @@
     ViewBag.Title = "AritcleList";
 }
 
-<h2>AritcleList</h2>
-
+<h2>文章列表</h2>
+<link href="~/Content/categorylist.css" rel="stylesheet" />
 <p>
-    @Html.ActionLink("Create New", "CreateArticle")
+    @Html.ActionLink("添加文章", "CreateArticle")
 </p>
 <table class="table">
     <tr>
@@ -46,10 +46,10 @@
         <td>
             @Html.DisplayFor(modelItem => item.BadCount)
         </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        <td class="list-wrap">
+            @Html.ActionLink("编辑", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("详情", "Details", new { id=item.Id }) |
+            @Html.ActionLink("删除", "Delete", new { id=item.Id })
         </td>
     </tr>
 }
