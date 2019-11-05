@@ -77,7 +77,7 @@ namespace BlogSyster.DAL
             return await GetAllAsync().FirstAsync(predicate: m => m.Id == id);
         }
 
-        public async Task RemoveAsync(Guid id, bool saved = true)
+        public async Task RemoveAsync(Guid id, bool saved = false)
         {
             _db.Configuration.ValidateOnSaveEnabled = false;//EF关闭检查
             var t = new T() { Id = id };

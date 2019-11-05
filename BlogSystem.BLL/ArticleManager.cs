@@ -11,11 +11,11 @@ using System.Threading.Tasks;
 
 namespace BlogSystem.BLL
 {
-    public  class ArticleManager : IArticleManager
+    public class ArticleManager : IArticleManager
     {
         public async Task CreateArticle(string title, string content, Guid[] categoryIds, Guid userId)
         {
-           using (var articleSvc=new ArticleService())
+            using (var articleSvc = new ArticleService())
             {
                 var article = new Artcile()
                 {
@@ -23,15 +23,15 @@ namespace BlogSystem.BLL
                     Content = content,
                     UseId = userId,
                 };
-               await articleSvc.CreateAsync(article);
+                await articleSvc.CreateAsync(article);
                 Guid articleId = article.Id;
-                using(var articleToCategory=new ArticleToCategory())
+                using (var articleToCategory = new ArticleToCategory())
                 {
-                    foreach(var elem in categoryIds)
+                    foreach (var elem in categoryIds)
                     {
                         await articleToCategory.CreateAsync(new ArtcleToCategory()
                         {
-                            ArticleId=articleId,
+                            ArticleId = articleId,
                             //BlogCategoryId=categoryId,
                         }, saved: false);
                     }
@@ -42,24 +42,53 @@ namespace BlogSystem.BLL
 
         public async Task CreateCategory(string name, Guid userId)
         {
-            using(var categorySvc=new BlogCategoryServices())
+            using (var categorySvc = new BlogCategoryServices())
             {
-               await categorySvc.CreateAsync(new BlogCategory()
+                await categorySvc.CreateAsync(new BlogCategory()
                 {
                     CategoryName = name,
-                    UserId=userId,
+                    UserId = userId,
                 });
             }
         }
 
-        public Task EditArticle(Guid articleId, string title, string content, Guid[] categoryIds)
+        public async Task EditArticle(Guid articleId, string title, string content, Guid[] categoryIds)
         {
-            throw new NotImplementedException();
+            using (BlogSystem.IdAL.IArticleService articleService = new ArticleService())
+            {
+                var article = await articleService.GetOneByIdAsync(articleId);
+                article.Title = title;
+                article.Content = content;
+                await articleService.EditAsync(article);
+
+                using (BlogSystem.IdAL.IArticleToCategoryService articleToCategoryService = new ArticleToCategory())
+                {
+                    //删除原有的类别
+                    foreach (var categoryId in articleToCategoryService.GetAllAsync().Where(m => m.ArticleId == articleId))
+                    {
+                        await articleToCategoryService.RemoveAsync(categoryId, saved: false);
+                    }
+
+                    //foreach (var categoryId in categoryIds)
+                    //{
+                    //    await articleToCategoryService.CreateAsync(new ArtcleToCategory() { ArticleId = articleId, BlogCategoryId = categoryId }, saved: false);
+                    //}
+                    await articleToCategoryService.Save();
+                }
+            }
         }
 
         public Task EditCatrgory(Guid categoryId, string newCategoryName)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<bool> ExistsArticle(Guid articleId)
+        {
+            using (BlogSystem.IdAL.IArticleService articleService = new ArticleService())
+            {
+                return await articleService.GetAllAsync().AnyAsync(predicate: m => m.Id == articleId);
+            }
         }
 
         public Task<List<ArticleDto>> GetAllArticleBycategoryId(Guid categoryId)
@@ -72,27 +101,27 @@ namespace BlogSystem.BLL
             throw new NotImplementedException();
         }
 
-        public async Task<List<ArticleDto>> GetAllArticlesByuserId(Guid userId)
+        public async Task<List<ArticleDto>> GetAllArticlesByuserId(Guid userId, int pageIndex, int pagesize)
         {
             using (var articleSvc = new ArticleService())
             {
-              var list= await articleSvc.GetAllAsync().Include(m=>m.User). Where(m => m.UseId == userId).Select(m=>new Dto.ArticleDto()
-              {
-                  Title=m.Title,
-                  BadCount=m.BadCount,
-                  GoodCount=m.GoodCount,
-                  Content=m.Content,
-                  Email=m.User.Email,
-                  CreateTime=m.CreateTime,
-                  Id=m.Id,
-                  ImagePath= m.User.ImagePath,
-              }
-              ).ToListAsync();
-                using(IArticleToCategoryService articleToCategoryService=new ArticleToCategory())
+                var list = await articleSvc.GetAllByPageOrderAsync(pagesize, pageIndex, false).Include(m => m.User).Where(m => m.UseId == userId)
+                      .Select(m => new Dto.ArticleDto()
+                      {
+                          Title = m.Title,
+                          BadCount = m.BadCount,
+                          GoodCount = m.GoodCount,
+                          Content = m.Content,
+                          Email = m.User.Email,
+                          CreateTime = m.CreateTime,
+                          Id = m.Id,
+                          ImagePath = m.User.ImagePath,
+                      }).ToListAsync();
+                using (IArticleToCategoryService articleToCategoryService = new ArticleToCategory())
                 {
                     foreach (var elem in list)
                     {
-                        var cates = await articleToCategoryService.GetAllAsync().Include(m=>m.BlogCategory).Where(m => m.ArticleId == elem.Id).ToListAsync();
+                        var cates = await articleToCategoryService.GetAllAsync().Include(m => m.BlogCategory).Where(m => m.ArticleId == elem.Id).ToListAsync();
                         elem.CategoryIds = cates.Select(m => m.BlogCategoryId).ToArray();
                         elem.CategoryNames = cates.Select(m => m.BlogCategory.CategoryName).ToArray();
                     }
@@ -112,11 +141,53 @@ namespace BlogSystem.BLL
             }
         }
 
-        public Task RemoveArticle(Guid articleId)
+        public async Task<int> GetDataCount(Guid userId)
         {
-            throw new NotImplementedException();
+            using (BlogSystem.IdAL.IArticleService articleService = new ArticleService())
+            {
+                return await articleService.GetAllAsync().CountAsync(m => m.UseId == userId);
+            }
         }
 
+        public async Task<ArticleDto> GetOneArticleById(Guid articleId)
+        {
+            using (BlogSystem.IdAL.IArticleService articleService = new ArticleService())
+            {
+                var data = await articleService.GetAllAsync()
+                    .Include(m => m.User)
+                    .Where(m => m.Id == articleId)
+                    .Select(m => new Dto.ArticleDto()
+                    {
+                        Id = m.Id,
+                        BadCount = m.BadCount,
+                        Title = m.Title,
+                        Content = m.Content,
+                        CreateTime = m.CreateTime,
+                        Email = m.User.Email,
+                        GoodCount = m.GoodCount,
+                        ImagePath = m.User.ImagePath,
+                    }).FirstAsync();
+                using (IArticleToCategoryService articleToCategoryService = new ArticleToCategory())
+                {
+                    var cates = await articleToCategoryService.GetAllAsync().Include(m => m.BlogCategory).Where(m => m.ArticleId == data.Id).ToListAsync();
+                    data.CategoryIds = cates.Select(m => m.BlogCategoryId).ToArray();
+                    data.CategoryNames = cates.Select(m => m.BlogCategory.CategoryName).ToArray();
+                    return data;
+                }
+            }
+        }
+        public async Task RemoveArticle(Guid articleId)
+        {
+            using (BlogSystem.IdAL.IArticleService articleService = new ArticleService())
+            {
+                //var article= await articleService.GetAllAsync().AnyAsync(predicate: m => m.Id == articleId);
+                //if (article)
+                //{
+                    var articles = await articleService.GetOneByIdAsync(articleId);
+                    await articleService.RemoveAsync(articles);
+                
+            }
+        }
         public Task RemoveCatrgory(string name)
         {
             throw new NotImplementedException();

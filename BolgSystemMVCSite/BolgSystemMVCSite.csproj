@@ -108,6 +108,9 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Webdiyer.MvcPager, Version=3.0.2015.802, Culture=neutral, PublicKeyToken=f6872c5a09aed72c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Webdiyer.MvcPager.3.0.1.1\lib\Webdiyer.MvcPager.dll</HintPath>
+    </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
@@ -132,8 +135,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ArticleViewModels\ArticleDetails.cs" />
     <Compile Include="Models\ArticleViewModels\CreateArticleViewModel.cs" />
     <Compile Include="Models\ArticleViewModels\CreateCategory.cs" />
+    <Compile Include="Models\ArticleViewModels\EditArticle.cs" />
+    <Compile Include="Models\ArticleViewModels\RemoveArticleViewModels.cs" />
     <Compile Include="Models\UserViewModels\LoginViewModel.cs" />
     <Compile Include="Models\UserViewModels\Register.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -190,6 +196,10 @@
     <Content Include="Views\Article\CreateCategory.cshtml" />
     <Content Include="Views\Article\CategoryList.cshtml" />
     <Content Include="Views\Article\AritcleList.cshtml" />
+    <Content Include="Views\Article\ArticleDetails.cshtml" />
+    <Content Include="Views\Article\AritcleList2.cshtml" />
+    <Content Include="Views\Article\EditArticle.cshtml" />
+    <Content Include="Views\Article\RemoveArticle.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -232,6 +242,9 @@
       <Project>{50ce68da-956e-4963-88d3-cd1e21661c0c}</Project>
       <Name>BlogSyster.DAL</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

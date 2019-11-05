@@ -198,3 +198,7 @@ E:\ASP.NET MVC5\yh\BolgSystemMVCSite\obj\Debug\BolgSystemMVCSite.csproj.CopyComp
 E:\ASP.NET MVC5\yh\BolgSystemMVCSite\obj\Debug\BolgSystemMVCSite.dll
 E:\ASP.NET MVC5\yh\BolgSystemMVCSite\obj\Debug\BolgSystemMVCSite.pdb
 E:\ASP.NET MVC5\yh\BolgSystemMVCSite\obj\Debug\BolgSystemMVCSite.csprojAssemblyReference.cache
+E:\ASP.NET MVC5\yh\BolgSystemMVCSite\bin\Webdiyer.MvcPager.dll
+E:\ASP.NET MVC5\yh\BolgSystemMVCSite\bin\Webdiyer.MvcPager.xml
+E:\ASP.NET MVC5\yh\BolgSystemMVCSite\bin\zh-CHS\Webdiyer.MvcPager.resources.dll
+E:\ASP.NET MVC5\yh\BolgSystemMVCSite\bin\zh-CHT\Webdiyer.MvcPager.resources.dll
