@@ -3,13 +3,12 @@
 @{
     ViewBag.Title = "ArticleDetails";
 }
-
-<h2>ArticleDetails</h2>
+<link href="~/Content/details.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://at.alicdn.com/t/font_1341852_1yfpq1jqe91.css">
+<h2>文章详情</h2>
 
 <div>
-    <h4>ArticleDto</h4>
-    <hr />
-    <dl class="dl-horizontal">
+    <dl class="dl-horizontal table-bordered">
         <dt>
             @Html.DisplayNameFor(model => model.Title)
         </dt>
@@ -58,26 +57,81 @@
             @Html.DisplayFor(model => model.BadCount)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ImagePath)
-        </dt>
+        @*<dt>
+                @Html.DisplayNameFor(model => model.ImagePath)
+            </dt>
 
-        <dt>
-            类别
-        </dt>
+            <dt>
+                类别
+            </dt>
 
-        @foreach (var item in Model.CategoryNames)
-        {
-            <dd class="CategoryNames">
-                @item
-            </dd>
-        }
-
-
+            @foreach (var item in Model.CategoryNames)
+            {
+                <dd class="CategoryNames">
+                    @item
+                </dd>
+            }*@
     </dl>
 </div>
+<div class="txtComment">
+    <input type="text" name="txtComment" id="txtComment" value="" />
+    <button onclick="addComment()">添加评论</button>
+</div>
+
 <p>
+    <div class="btn_wrap">
+        <button onclick="btnGoodHandler(this)" id="btnLike">点赞</button>
+        <button onclick="btnBadHandler(this)">反对</button>
+    </div>
+    <br />
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "AritcleList2")
 </p>
+<ol>
+    @foreach (var comment in ViewBag.Comments)
+    {
+        <li>
+            <span>@comment.Content</span>
+            <br />
+            <span>@comment.Email @comment.CreateTime</span>
+        </li>
+    }
+</ol>
+<script src="~/Scripts/articleDetails.js"></script>
+<script>
+        var articleId = '@Model.Id';
+        function btnGoodHandler(btn) {
+            $.ajax({
+                url: "/Article/GoodCount/"+articleId,
+                type: "post"
+            }).done(() => {
+                alert("点赞成功");
+                btn.disabled = true;
+            });
+        }
+        function btnBadHandler(btn) {
+            $.ajax({
+                url: "/Article/BadCount/"+articleId,
+                type: "post"
+            }).done(() => {
+                alert("反对成功");
+                btn.disabled = true;
+            });
+        }
+
+        function addComment() {
+            $.ajax({
+                url: "/Article/AddComment",
+                type: "post",
+                data: {
+                    Id: '@Model.Id',
+                    Content:document.getElementById("txtComment").value
+                }
+            }).done(() => {
+                alert("添加评论成功");
+                location.reload();
+            });
+        }
+</script>
+
 

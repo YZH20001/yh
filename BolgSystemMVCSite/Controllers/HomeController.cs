@@ -56,7 +56,6 @@ namespace BolgSystemMVCSite.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [BlogSystemAuth]
         public  ActionResult Login(Models.UserViewModels.LoginViewModel model)
         {
             if (ModelState.IsValid)
@@ -83,7 +82,7 @@ namespace BolgSystemMVCSite.Controllers
                         Session["loginName"] = model.Email;
                         Session["userId"] = userId;
                     }
-                    return RedirectToAction(nameof(Index));
+                    return RedirectToAction("Index");
                 }
                 else
                 {

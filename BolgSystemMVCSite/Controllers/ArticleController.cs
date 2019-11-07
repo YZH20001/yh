@@ -62,7 +62,7 @@ namespace BolgSystemMVCSite.Controllers
             {
                 var userId = Guid.Parse(Session["userId"].ToString());
                 await new ArticleManager().CreateArticle(model.Title, model.Content, model.CategoryIds, userId);
-                return RedirectToAction("AritcleList");
+                return RedirectToAction("AritcleList2");
             }
             ModelState.AddModelError(key: "", errorMessage: "添加失败");
             return View(model);
@@ -97,9 +97,9 @@ namespace BolgSystemMVCSite.Controllers
         {
             var articleMgr = new ArticleManager();
             if (!(await new ArticleManager().ExistsArticle(id.Value))|| id == null)
-            {
                 return RedirectToAction(nameof(AritcleList2));
-            }
+                ViewBag.Comments = await articleMgr.GetCommentsByArticleId(id.Value);
+            
             return View( await articleMgr.GetOneArticleById(id.Value));
         }
         [HttpGet]
@@ -162,6 +162,28 @@ namespace BolgSystemMVCSite.Controllers
                 ViewBag.CategoryIds = await new ArticleManager().GetAllCategories(userId);
                 return View(model);
             }
+        }
+        [HttpPost]
+        public async Task<ActionResult> GoodCount(Guid id)
+        {
+         BlogSystem.IBLL.IArticleManager articlrManager = new ArticleManager();
+           await articlrManager.GoodCountAdd(id);
+            return Json(data: new { result = "OK" });
+        }
+        [HttpPost]
+        public async Task<ActionResult> BadCount(Guid id)
+        {
+            BlogSystem.IBLL.IArticleManager articlrManager = new ArticleManager();
+            await articlrManager.BadCountAdd(id);
+            return Json(data: new { result = "OK" });
+        }
+        [HttpPost]
+        public async Task<ActionResult> AddComment(Models.ArticleViewModels.CreateCommentViewModel model)
+        {
+            var userid = Guid.Parse(Session["userid"].ToString());
+            BlogSystem.IBLL.IArticleManager articleManager = new ArticleManager();
+            await articleManager.CreateComment(userid, model.Id, model.Content);
+            return Json(new { result = "ok" });
         }
     }
 }

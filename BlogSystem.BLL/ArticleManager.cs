@@ -13,6 +13,16 @@ namespace BlogSystem.BLL
 {
     public class ArticleManager : IArticleManager
     {
+        public async Task BadCountAdd(Guid articleId)
+        {
+            using (BlogSystem.IdAL.IArticleService articleService = new ArticleService())
+            {
+                var article = await articleService.GetOneByIdAsync(articleId);
+                article.BadCount++;
+                await articleService.EditAsync(article);
+            }
+        }
+
         public async Task CreateArticle(string title, string content, Guid[] categoryIds, Guid userId)
         {
             using (var articleSvc = new ArticleService())
@@ -31,8 +41,9 @@ namespace BlogSystem.BLL
                     {
                         await articleToCategory.CreateAsync(new ArtcleToCategory()
                         {
+                            //**********************************************************
                             ArticleId = articleId,
-                            //BlogCategoryId=categoryId,
+                            BlogCategoryId=Guid.Parse(categoryIds.ToString()),
                         }, saved: false);
                     }
                     await articleToCategory.Save();
@@ -52,6 +63,42 @@ namespace BlogSystem.BLL
             }
         }
 
+        public async Task CreateComment(Guid userId, Guid articleId, string content)
+        {
+            using (BlogSystem.IdAL.ICommentService commentService = new CommentService())
+            {
+                await commentService.CreateAsync(new Comment()
+                {
+                    UserId = userId,
+                    ArticleId = articleId,
+                    Content = content
+                });
+            }
+        }
+        /// <summary>
+        /// 查询
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="articleId"></param>
+        /// <param name="content"></param>
+        /// <returns></returns>
+        public async Task<List<CommentDto>> GetCommentsByArticleId(Guid articleId)
+        {
+            using (BlogSystem.IdAL.ICommentService commentService = new CommentService())
+            {
+                return await commentService.GetAllOrderAsync(false).Where(m => m.ArticleId == articleId)
+                     .Include(m => m.User)
+                     .Select(m => new Dto.CommentDto()
+                     {
+                         Id = m.Id,
+                         ArticleId = m.ArticleId,
+                         UserId = m.UserId,
+                         Email = m.User.Email,
+                         Content = m.Content,
+                         CreateTime = m.CreateTime
+                     }).ToListAsync();
+            }
+        }
         public async Task EditArticle(Guid articleId, string title, string content, Guid[] categoryIds)
         {
             using (BlogSystem.IdAL.IArticleService articleService = new ArticleService())
@@ -141,6 +188,8 @@ namespace BlogSystem.BLL
             }
         }
 
+
+
         public async Task<int> GetDataCount(Guid userId)
         {
             using (BlogSystem.IdAL.IArticleService articleService = new ArticleService())
@@ -176,6 +225,17 @@ namespace BlogSystem.BLL
                 }
             }
         }
+
+        public async Task GoodCountAdd(Guid articleId)
+        {
+            using (BlogSystem.IdAL.IArticleService articleService = new ArticleService())
+            {
+                var article = await articleService.GetOneByIdAsync(articleId);
+                article.GoodCount++;
+                await articleService.EditAsync(article);
+            }
+        }
+
         public async Task RemoveArticle(Guid articleId)
         {
             using (BlogSystem.IdAL.IArticleService articleService = new ArticleService())
@@ -183,9 +243,9 @@ namespace BlogSystem.BLL
                 //var article= await articleService.GetAllAsync().AnyAsync(predicate: m => m.Id == articleId);
                 //if (article)
                 //{
-                    var articles = await articleService.GetOneByIdAsync(articleId);
-                    await articleService.RemoveAsync(articles);
-                
+                var articles = await articleService.GetOneByIdAsync(articleId);
+                await articleService.RemoveAsync(articles);
+
             }
         }
         public Task RemoveCatrgory(string name)

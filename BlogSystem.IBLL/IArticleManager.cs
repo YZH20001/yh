@@ -33,5 +33,12 @@ namespace BlogSystem.IBLL
         Task<bool> ExistsArticle(Guid articleId);
 
         Task<Dto.ArticleDto> GetOneArticleById(Guid articleId);
+
+        Task GoodCountAdd(Guid articleId);
+        Task BadCountAdd(Guid articleId);
+
+        Task CreateComment(Guid userId, Guid articleId, string content);
+
+        Task<List<Dto.CommentDto>> GetCommentsByArticleId(Guid articleId);
     }
 }

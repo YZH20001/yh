@@ -81,9 +81,9 @@
     <Compile Include="BaseEntity.cs" />
     <Compile Include="Comment.cs" />
     <Compile Include="Fans.cs" />
-    <Compile Include="Migrations\201910290522482_yuanhui201910291322.cs" />
-    <Compile Include="Migrations\201910290522482_yuanhui201910291322.designer.cs">
-      <DependentUpon>201910290522482_yuanhui201910291322.cs</DependentUpon>
+    <Compile Include="Migrations\201911061317028_yuanhui2019116.cs" />
+    <Compile Include="Migrations\201911061317028_yuanhui2019116.designer.cs">
+      <DependentUpon>201911061317028_yuanhui2019116.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -94,8 +94,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201910290522482_yuanhui201910291322.resx">
-      <DependentUpon>201910290522482_yuanhui201910291322.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201911061317028_yuanhui2019116.resx">
+      <DependentUpon>201911061317028_yuanhui2019116.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
