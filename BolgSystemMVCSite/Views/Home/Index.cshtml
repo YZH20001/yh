@@ -8,7 +8,7 @@
 </h3>
 
 <div>
-    <div id="wrap_left">
+    <div @*id="wrap_left"*@ class="col-md-3">
         <ul>
             <li class="blog">
                 博客园
@@ -36,6 +36,9 @@
                 </ul>
             </li>
         </ul>
+    </div>
+    <div class="col-md-9">
+       @Html.ActionLink("AritcleList2", "Article");
     </div>
 </div>
 <script src="~/Scripts/index.js"></script>

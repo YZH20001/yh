@@ -163,7 +163,8 @@
     <Content Include="Images\2.jpg" />
     <Content Include="Images\3.jpg" />
     <Content Include="Images\4.jpg" />
-    <Content Include="Scripts\articleDetails.js" />
+    <Content Include="Images\aixin.png" />
+    <Content Include="Scripts\articledetails.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.3.1-vsdoc.js" />

@@ -59,6 +59,5 @@ E:\ASP.NET MVC5\yh\BlogSystem\bin\Debug\zh-Hans\System.Web.WebPages.Razor.resour
 E:\ASP.NET MVC5\yh\BlogSystem\obj\Debug\BlogSystem.csproj.CopyComplete
 E:\ASP.NET MVC5\yh\BlogSystem\obj\Debug\BlogSystem.dll
 E:\ASP.NET MVC5\yh\BlogSystem\obj\Debug\BlogSystem.pdb
-E:\ASP.NET MVC5\yh\BlogSystem\obj\Debug\BlogSystem.Migrations.yuanhui2019116.resources
+E:\ASP.NET MVC5\yh\BlogSystem\obj\Debug\BlogSystem.Migrations.yuanhui20191110.resources
 E:\ASP.NET MVC5\yh\BlogSystem\obj\Debug\BlogSystem.csproj.GenerateResource.cache
-E:\ASP.NET MVC5\yh\BlogSystem\obj\Debug\BlogSystem.csprojAssemblyReference.cache

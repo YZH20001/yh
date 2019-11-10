@@ -22,7 +22,7 @@ namespace BlogSystem.IdAL
         /// <param name="pageIndex"></param>
         /// <returns></returns>
         IQueryable<T> GetAllByPageAsync(int pageSize = 10, int pageIndex = 0);
-        IQueryable<T> GetAllOrderAsync(bool asc = true);
+        IQueryable<T> GetAllOrderAsync(bool asc = true);//排序
 
         IQueryable<T> GetAllByPageOrderAsync(int pageSize = 10, int pageIndex = 0, bool asc = true);
     }

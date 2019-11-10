@@ -5,3 +5,11 @@
 .btn_wrap {
     margin-right: 10px;
 }
+.txtComment {
+    margin-top: 31px;
+}
+.likeWrap {
+    position: relative;
+    font-size: 20px;
+    color: #ccc;
+}

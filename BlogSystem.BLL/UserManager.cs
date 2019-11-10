@@ -84,7 +84,12 @@ namespace BlogSystem.BLL
         {
            using (IdAL.IUserService userService=new BlogSyster.DAL.UserService())
             {
-              await userService.CreateAsync(new BlogSystem.User() { Email = email, Password = password, SiteName = "默认", ImagePath ="default.pan"});
+              await userService.CreateAsync(new BlogSystem.User() 
+              { Email = email,
+                  Password = password, 
+                  SiteName = "默认的小站", 
+                  ImagePath ="default.png"
+              });
             }
         }
     }

@@ -6,7 +6,7 @@ namespace BlogSystem
         /// <summary>
         /// 编号
         /// </summary>
-        public Guid Id { get; set; } = Guid.NewGuid();
+        public Guid Id { get; set; } = Guid.NewGuid();//特别长不会重复
         /// <summary>
         /// 创建时间
         /// </summary>

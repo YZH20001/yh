@@ -11,7 +11,7 @@ namespace BlogSystem
     /// <summary>
     /// 用户表
     /// </summary>
-   public class User:BaseEntity
+   public class User:BaseEntity//除BaseEntity以外的内容
     {
         /// <summary>
         /// 电子邮箱

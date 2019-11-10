@@ -1,10 +1,9 @@
 ﻿@model BlogSystem.Dto.ArticleDto
-
+<link href="~/Content/details.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://at.alicdn.com/t/font_1341852_1yfpq1jqe91.css">
 @{
     ViewBag.Title = "ArticleDetails";
 }
-<link href="~/Content/details.css" rel="stylesheet" />
-<link rel="stylesheet" href="https://at.alicdn.com/t/font_1341852_1yfpq1jqe91.css">
 <h2>文章详情</h2>
 
 <div>
@@ -80,6 +79,7 @@
 
 <p>
     <div class="btn_wrap">
+        <div id="likeBox" style="height:20px;"></div>
         <button onclick="btnGoodHandler(this)" id="btnLike">点赞</button>
         <button onclick="btnBadHandler(this)">反对</button>
     </div>
@@ -97,7 +97,7 @@
         </li>
     }
 </ol>
-<script src="~/Scripts/articleDetails.js"></script>
+<script src="~/Scripts/articledetails.js"></script>
 <script>
         var articleId = '@Model.Id';
         function btnGoodHandler(btn) {
@@ -105,8 +105,8 @@
                 url: "/Article/GoodCount/"+articleId,
                 type: "post"
             }).done(() => {
-                alert("点赞成功");
-                btn.disabled = true;
+                //alert("点赞成功");
+                btn.disabled = false;
             });
         }
         function btnBadHandler(btn) {
@@ -131,7 +131,7 @@
                 alert("添加评论成功");
                 location.reload();
             });
-        }
+    }
 </script>
 
 

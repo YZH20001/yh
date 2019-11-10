@@ -17,7 +17,5 @@ namespace BlogSystem.IdAL
 
        // //改个人信息
        // Task ChangeInformation(string email,string SiteName, string ImagePath);
-
-
     }
 }

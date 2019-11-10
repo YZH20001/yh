@@ -16,6 +16,7 @@
         public BlogContent()
             : base("name=con")
         {
+            //从不创建数据库
             Database.SetInitializer<BlogContent>(null);
         }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -28,8 +29,8 @@
         public DbSet<BlogCategory> BlogCategories { set; get; }
         public DbSet<Artcile> Artciles { set; get; }
         public DbSet<ArtcleToCategory> ArtcleToCategories { set; get; }
-        public DbSet<Comment> comments { set; get; }
-        public DbSet<Fans> fans { set; get; }
+        public DbSet<Comment> Comments { set; get; }
+        public DbSet<Fans> Fans { set; get; }
     }
 
 }

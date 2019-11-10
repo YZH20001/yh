@@ -38,5 +38,6 @@ namespace BlogSystem
         /// </summary>
         public int BadCount { get; set; }
 
-    }
+    } 
 }
+ 

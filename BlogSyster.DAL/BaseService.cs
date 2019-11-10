@@ -60,6 +60,7 @@ namespace BlogSyster.DAL
         public IQueryable<T> GetAllOrderAsync(bool asc = true)
         {
             var datas = GetAllAsync();
+            //升序
             if (asc)
             {
                 datas = datas.OrderBy(m => m.CreateTime);

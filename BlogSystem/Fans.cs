@@ -16,7 +16,7 @@ namespace BlogSystem
         /// 用户编号
         /// </summary>
         public Guid UserId { get; set; }
-        public User user { get; set; }
+        public User User { get; set; }
        /// <summary>
        /// 关注的用户编号
        /// </summary>
