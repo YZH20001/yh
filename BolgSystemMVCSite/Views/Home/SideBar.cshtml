@@ -1,0 +1,14 @@
+﻿@using BlogSystem
+@{
+    var sitebars = (List<SideBars>)ViewBag.SideBars;
+}
+
+<ul class="sideBar">
+    @foreach (var sideBar in sitebars)
+    {
+        <li>
+            @Html.ActionLink(sideBar.Name, sideBar.Action, sideBar.Controller)
+        </li>
+    }
+
+</ul>

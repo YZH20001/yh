@@ -8,8 +8,7 @@
 console.log(sanjiaoArticle);
 init();
 function init() {
-    createM.addEventListener("mouseover", mouseroverHandler);
-    createM.addEventListener("mouseout", mouseroutHandler);
+   
     articleA.addEventListener("mouseover", mouseroverArticleHandler);
     articleA.addEventListener("mouseout", mouseroutArticleHandler);
     createM.addEventListener("click", clickHandler);

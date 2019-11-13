@@ -7,56 +7,57 @@
 <h2>文章详情</h2>
 
 <div>
-    <dl class="dl-horizontal table-bordered">
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
+    <table class="table table-bordered">
+        <dl class="dl-horizontal table-bordered">
+            <dt>
+                @Html.DisplayNameFor(model => model.Title)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Title)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Content)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Content)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Content)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Content)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CreateTime)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.CreateTime)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.CreateTime)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.CreateTime)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.GoodCount)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.GoodCount)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.GoodCount)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.GoodCount)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.BadCount)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.BadCount)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.BadCount)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.BadCount)
+            </dd>
 
-        @*<dt>
+            @*<dt>
                 @Html.DisplayNameFor(model => model.ImagePath)
             </dt>
 
@@ -70,7 +71,8 @@
                     @item
                 </dd>
             }*@
-    </dl>
+        </dl>
+    </table>
 </div>
 <div class="txtComment">
     <input type="text" name="txtComment" id="txtComment" value="" />
@@ -80,12 +82,12 @@
 <p>
     <div class="btn_wrap">
         <div id="likeBox" style="height:20px;"></div>
-        <button onclick="btnGoodHandler(this)" id="btnLike">点赞</button>
+        <button onclick="btnGoodHandler(this)" id="btnLike" class="layui-btn layui-btn-normal">点赞</button>
         <button onclick="btnBadHandler(this)">反对</button>
     </div>
     <br />
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "AritcleList2")
+    @Html.ActionLink("编辑", "EditArticle", new { id = Model.Id }) |
+    @Html.ActionLink("返回上一列", "AritcleList2")
 </p>
 <ol>
     @foreach (var comment in ViewBag.Comments)

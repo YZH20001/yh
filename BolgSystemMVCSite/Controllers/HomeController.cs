@@ -1,4 +1,5 @@
-﻿using BlogSystem.BLL;
+﻿using BlogSystem;
+using BlogSystem.BLL;
 using BolgSystemMVCSite.Fillters;
 using System;
 using System.Collections.Generic;
@@ -11,9 +12,13 @@ namespace BolgSystemMVCSite.Controllers
 {
     public class HomeController : Controller
     {
+       
+        private BlogContent db = new BlogContent();
         [BlogSystemAuth]
         public ActionResult Index()
         {
+            var sidebars = db.sideBars.ToList();
+            ViewBag.SideBars = sidebars;
             return View();
         }
         [BlogSystemAuth]
@@ -82,7 +87,7 @@ namespace BolgSystemMVCSite.Controllers
                         Session["loginName"] = model.Email;
                         Session["userId"] = userId;
                     }
-                    return RedirectToAction("Index");
+                    return RedirectToAction("AritcleList2", "Article");
                 }
                 else
                 {
@@ -90,6 +95,29 @@ namespace BolgSystemMVCSite.Controllers
                 }
             }
             return View(model);
+        }
+        [HttpGet]
+        public ActionResult ChangeInformation()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult ChangeInformation(Models.ChangeInformation model )
+        {
+            if (ModelState.IsValid)
+            {
+                BlogSystem.IBLL.IUserManager user = new UserManager();
+                user.ChangeInformation(model.Email,model.SiteName,model.ImagePath);
+                return Content("修改成功");
+            }
+            return View(model);
+        }
+        [ChildActionOnly]
+        public ActionResult SideBar()
+        {
+            var sidebars = db.sideBars.ToList();
+            ViewBag.SideBars = sidebars;
+            return PartialView("~/Views/Home/SideBar.cshtml");
         }
     }
 }

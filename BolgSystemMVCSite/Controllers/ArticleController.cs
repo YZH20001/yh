@@ -82,7 +82,7 @@ namespace BolgSystemMVCSite.Controllers
         }
         [HttpGet]
 
-        public async Task<ActionResult> AritcleList2(int pageIndex = 1, int pageSize = 4)
+        public async Task<ActionResult> AritcleList2(int pageIndex = 1, int pageSize = 7)
         {
             //需要给页面前端 总页面数，当前页面，可显示的总页面数
             var articleMgr = new ArticleManager();

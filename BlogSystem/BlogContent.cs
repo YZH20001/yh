@@ -31,6 +31,9 @@
         public DbSet<ArtcleToCategory> ArtcleToCategories { set; get; }
         public DbSet<Comment> Comments { set; get; }
         public DbSet<Fans> Fans { set; get; }
+        public DbSet<SideBars> sideBars { set; get; }
+
+       
     }
 
 }

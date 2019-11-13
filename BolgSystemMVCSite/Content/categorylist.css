@@ -1,6 +1,6 @@
 ﻿body {
 }
-h2{
+h1{
     text-align:center;
 }
 .list-wrap > a:nth-child(1),
@@ -19,3 +19,5 @@ h2{
 .list-wrap > a:nth-child(3) {
     background-color: red;
 }
+
+
