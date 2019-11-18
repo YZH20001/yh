@@ -21,43 +21,43 @@
             @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
         </div>
     </div>
-
+    <hr />
     <div class="form-group">
         @Html.LabelFor(model => model.Content, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
-            @Html.TextAreaFor( model => model.Content, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.TextAreaFor(model => model.Content, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
         </div>
     </div>
+    <hr />
     <div class="form-group">
         @Html.LabelFor(model => model.CategoryIds, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             <ul class="categoryIds">
                 @foreach (var elems in ViewBag.CategoryIds)
                 {
-                <li><input type="checkbox" name="CategoryIds" value="elems.Id" />@elems.CategoryName</li>
+                    <li class="CategoryId"><input type="checkbox" name="CategoryIds" value="@elems.Id" />@elems.CategoryName</li>
                 }
             </ul>
         </div>
     </div>
-
+    <hr />
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="添加" class="btn btn-default" />
+            <input type="submit" value="添加" class="layui-btn layui-btn-normal" />
         </div>
     </div>
 </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index", "Home")
-</div>
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
 <style>
     #Content{
         height:300px;
+    }
+    .CategoryId{
+        width:10%;
+        float:left;
     }
 </style>

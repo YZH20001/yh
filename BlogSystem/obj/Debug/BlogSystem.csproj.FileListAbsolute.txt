@@ -61,3 +61,4 @@ E:\ASP.NET MVC5\yh\BlogSystem\obj\Debug\BlogSystem.dll
 E:\ASP.NET MVC5\yh\BlogSystem\obj\Debug\BlogSystem.pdb
 E:\ASP.NET MVC5\yh\BlogSystem\obj\Debug\BlogSystem.Migrations.yuanhui20191112.resources
 E:\ASP.NET MVC5\yh\BlogSystem\obj\Debug\BlogSystem.csproj.GenerateResource.cache
+E:\ASP.NET MVC5\yh\BlogSystem\obj\Debug\BlogSystem.csprojAssemblyReference.cache

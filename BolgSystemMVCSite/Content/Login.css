@@ -12,6 +12,7 @@
     background-size: cover;
 }
 .form-horizontal {
+    word-break:keep-all;
     width: 32%;
-    margin: 257px auto;
+    margin: 155px auto;
 }

@@ -37,13 +37,13 @@ namespace BlogSystem.BLL
                 Guid articleId = article.Id;
                 using (var articleToCategory = new ArticleToCategory())
                 {
-                    foreach (var elem in categoryIds)
+                    foreach (var categoryId in categoryIds)
                     {
                         await articleToCategory.CreateAsync(new ArtcleToCategory()
                         {
                             //**********************************************************
                             ArticleId = articleId,
-                            BlogCategoryId=Guid.Parse(categoryIds.ToString()),
+                            BlogCategoryId=categoryId
                         }, saved: false);
                     }
                     await articleToCategory.Save();

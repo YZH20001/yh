@@ -1,4 +1,6 @@
 ﻿@model IEnumerable<BlogSystem.Dto.BlogCategoryDto>
+@using Webdiyer.WebControls.Mvc
+@*@model Webdiyer.WebControls.Mvc.PagedList<BlogSystem.Dto.BlogCategoryDto>*@
 
 @{
     ViewBag.Title = "CategoryList";
@@ -9,28 +11,50 @@
 <p>
     @Html.ActionLink("创建分类", "CreateCategory")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.CategoryName)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+<table class="table table-bordered" style="width:100%">
+    <thead>
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.CategoryName)
-            </td>
-            <td class="list-wrap">
-                @Html.ActionLink("编辑", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("详情", "Details", new { id = item.Id }) |
-                @Html.ActionLink("删除", "Delete", new { id = item.Id })
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryName)
+            </th>
+            <th></th>
         </tr>
-    }
+    </thead>
 
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CategoryName)
+                </td>
+                <td class="list-wrap">
+                    @Html.ActionLink("编辑", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("详情", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("删除", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+
+    </tbody>
+    <tfoot>
+        @*<tr>
+            <td colspan="6">
+                <nav>
+                    @Html.Pager(Model, new PagerOptions
+                    {
+                   PageIndexParameterName = "pageIndex",
+                   ContainerTagName = "ul",
+                   CssClass = "pagination",
+                   CurrentPagerItemTemplate = "<li class=\"active\"><a href=\"#\">{0}</a></li>",
+                   DisabledPagerItemTemplate = "<li class=\"disabled\"><a>{0}</a></li>",
+                   PagerItemTemplate = "<li>{0}</li>",
+                   Id = "bootstrappager"
+                    })
+                </nav>
+            </td>
+        </tr>*@
+    </tfoot>
 
 </table>
 <div>

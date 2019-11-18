@@ -7,3 +7,4 @@ E:\ASP.NET MVC5\yh\BlogSystem.Dto\bin\Debug\BlogSystem.Dto.dll
 E:\ASP.NET MVC5\yh\BlogSystem.Dto\bin\Debug\BlogSystem.Dto.pdb
 E:\ASP.NET MVC5\yh\BlogSystem.Dto\obj\Debug\BlogSystem.Dto.dll
 E:\ASP.NET MVC5\yh\BlogSystem.Dto\obj\Debug\BlogSystem.Dto.pdb
+E:\ASP.NET MVC5\yh\BlogSystem.Dto\obj\Debug\BlogSystem.Dto.csprojAssemblyReference.cache

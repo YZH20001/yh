@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Webdiyer.WebControls.Mvc;
 
 namespace BolgSystemMVCSite.Controllers
 {
@@ -17,8 +18,6 @@ namespace BolgSystemMVCSite.Controllers
         [BlogSystemAuth]
         public ActionResult Index()
         {
-            var sidebars = db.sideBars.ToList();
-            ViewBag.SideBars = sidebars;
             return View();
         }
         [BlogSystemAuth]
@@ -49,7 +48,7 @@ namespace BolgSystemMVCSite.Controllers
             {
                 BlogSystem.IBLL.IUserManager user = new UserManager();
                 await user.Register(model.Emali, model.Password);
-                return Content("注册成功!");
+                return RedirectToAction("Login");
             }
             return View(model);
         }
@@ -97,21 +96,51 @@ namespace BolgSystemMVCSite.Controllers
             return View(model);
         }
         [HttpGet]
-        public ActionResult ChangeInformation()
+        public  ActionResult ChangePassWord()
         {
             return View();
         }
         [HttpPost]
-        public ActionResult ChangeInformation(Models.ChangeInformation model )
+        public async Task<ActionResult> ChangePassWord(Models.UserViewModels.ChangePassWordViewModel model)
         {
             if (ModelState.IsValid)
             {
-                BlogSystem.IBLL.IUserManager user = new UserManager();
-                user.ChangeInformation(model.Email,model.SiteName,model.ImagePath);
+                BlogSystem.IBLL.IUserManager userManager = new BlogSystem.BLL.UserManager();
+               await userManager.ChangePassWord(model.Email,model.OldPwd, model.NewPwd);
                 return Content("修改成功");
             }
             return View(model);
         }
+        //[HttpGet]
+        //public async Task<ActionResult> ChangeInformation(string email)
+        //{
+        //    BlogSystem.IBLL.IUserManager userManager = new UserManager();
+        //    var data = await userManager.GetUserEmail(email);
+        //    return View(new Models.ChangeInformationViewModel()
+        //    {
+        //       Email=data.Email,
+        //       SiteName=data.SiteName,
+        //       ImagePath=data.ImagePath,
+        //    });
+        //}
+        [HttpGet]
+        public ActionResult ChangeInformation()
+        {
+           
+            return View();
+        }
+        [HttpPost]
+        public async Task<ActionResult> ChangeInformation(Models.ChangeInformationViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                BlogSystem.IBLL.IUserManager userManager = new UserManager();
+              await userManager.ChangeInformation(model.Email,model.SiteName,model.ImagePath);
+                return Content("修改成功");
+            }
+            return View(model);
+        }
+
         [ChildActionOnly]
         public ActionResult SideBar()
         {

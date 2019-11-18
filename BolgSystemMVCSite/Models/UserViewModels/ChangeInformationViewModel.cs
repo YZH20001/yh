@@ -6,9 +6,9 @@ using System.Web;
 
 namespace BolgSystemMVCSite.Models
 {
-    public class ChangeInformation
+    public class ChangeInformationViewModel
     {
-        [Required]
+        public Guid Id { get; set; }
         [EmailAddress]
         [Display(Name ="邮箱")]
         public string Email { get; set; }

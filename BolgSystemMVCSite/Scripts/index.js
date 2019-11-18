@@ -9,7 +9,7 @@ console.log(sanjiaoArticle);
 init();
 function init() {
    
-    articleA.addEventListener("mouseover", mouseroverArticleHandler);
+  
     articleA.addEventListener("mouseout", mouseroutArticleHandler);
     createM.addEventListener("click", clickHandler);
     articleA.addEventListener("click", clickArticleHandler);

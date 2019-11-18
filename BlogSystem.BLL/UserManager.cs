@@ -1,5 +1,6 @@
-﻿using BlogSystem.Dto;
+﻿ using BlogSystem.Dto;
 using BlogSystem.IBLL;
+using BlogSystem.IdAL;
 using BlogSyster.DAL;
 
 using System;
@@ -37,6 +38,11 @@ namespace BlogSystem.BLL
             }
         }
 
+        public Task<List<UserDto>> GetAllUsersByuserId(Guid userId, int pageIndex, int pagesize)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<UserInformationDto> GetUserEmail(string email)
         {
             using (IdAL.IUserService userService = new BlogSyster.DAL.UserService())
@@ -50,7 +56,7 @@ namespace BlogSystem.BLL
                         FansCount = m.FansCount,
                         ImagePath = m.ImagePath,
                         SiteName = m.SiteName,
-                        FocusCount = m.FocusCount
+                        FocusCount = m.FocusCount,
                     }).FirstAsync();
                 }
                 else

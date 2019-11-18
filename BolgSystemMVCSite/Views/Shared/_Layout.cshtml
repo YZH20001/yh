@@ -19,9 +19,18 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no">
     <link href="~/Content/layui.css" rel="stylesheet" />
+    <link href="~/Content/layer.css" rel="stylesheet" />
+    <link href="~/Content/code.css" rel="stylesheet" />
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <style>
+        textarea {
+            background-color: beige;
+            width: 100%;
+            height: 400px;
+            max-width: 880px;
+        }
+
         .sideBar {
             display: flex;
             flex-direction: column;
@@ -38,13 +47,30 @@
                     font-size: 16px;
                 }
 
-       .layui-header{
-        position:relative;
-        top:-70px;
-    }
-       th{
-           text-align:center;
-       }
+        .layui-header {
+            position: relative;
+            top: -70px;
+        }
+
+        th {
+            text-align: center;
+        }
+
+        .layui-nav-item a {
+            font-size: 14px;
+            color: white;
+            font-weight: bold;
+        }
+        .text-indent{
+            text-indent: -6rem;
+        }
+        .manager{
+            text-indent: -3rem;
+        }
+        cite{
+            font-size: 16px;
+           font-weight: bold;
+        }
     </style>
 </head>
 <body class="layui-layout-body">
@@ -69,51 +95,101 @@
                 <li class="layui-nav-item">
                     <a href="javascript:;">
                         <img src="//tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg" class="layui-nav-img">
-                        贤心
+                        凌波漫步
                     </a>
                     <dl class="layui-nav-child">
-                        <dd><a href="">基本资料</a></dd>
-                        <dd><a href="">安全设置</a></dd>
+                        <dd class="add-color">
+                            <a href="~/Home/ChangeInformation">
+                                基本资料
+                            </a>
+                        </dd>
                     </dl>
                 </li>
-                <li class="layui-nav-item"><a href="">退了</a></li>
+                <li class="layui-nav-item"><a href="~/Home/Login">退了</a></li>
             </ul>
         </div>
 
         <div class="layui-side layui-bg-black">
             <div class="layui-side-scroll">
                 <!-- 左侧导航区域 -->
-                @Html.Action("SideBar", "Home")
                 <ul class="layui-nav layui-nav-tree" lay-filter="test">
+                    <li class="layui-nav-item">
+                    <a href="~/SideBars/Create">
+                        <i class="layui-icon layui-icon-home"></i>
+                        <cite>添加导航列表</cite>
+                    </a>
+                    </li>
                     <li class="layui-nav-item layui-nav-itemed">
-                        <a class="" href="javascript:;">所有商品</a>
+                        <a href="javascript:;"lay-direction="2"class="manager">
+                        <i class="layui-icon layui-icon-app" ></i>
+                        <cite>所有管理</cite>
+                            <span class="layui-nav-more"></span>
+                        </a>
                         <dl class="layui-nav-child">
-                            <dd><a href="javascript:;">列表一</a></dd>
-                            <dd><a href="javascript:;">列表二</a></dd>
-                            <dd><a href="javascript:;">列表三</a></dd>
-                            <dd><a href="">超链接</a></dd>
+                            <dd >@Html.Action("SideBar", "Home")</dd>
                         </dl>
                     </li>
-                    <li class="layui-nav-item">
-                        <a href="javascript:;">设置</a>
+                    <li data-name="set"data-jump class="layui-nav-item layui-nav-itemed">
+                        <a href="javascript:;" lay-tips="设置" lay-direction="2"class="text-indent">
+                            <i class="layui-icon layui-icon-set"></i>
+                            <cite>设置</cite>
+                        </a>
                         <dl class="layui-nav-child">
-                            <dd><a href="~/Home/ChangeInformation.cshtml">我的设置</a></dd>
+                            <dd class="layui-nav-itemed">
+                                <a href="javascript:;">
+                                    我的设置
+                                    <span class="layui-nav-more"></span>
+                                </a>
+                                <dl class="layui-nav-child">
+                                    <dd data-name="password"class="add-color">
+                                        <a href="~/Home/ChangePassWord">
+                                            修改密码
+                                        </a>
+                                    </dd>
+                                    <dd class="add-color">
+                                        <a href="~/Home/ChangeInformation">
+                                            基本资料
+                                        </a>
+                                    </dd>
+                                </dl>
+                            </dd>
                         </dl>
                     </li>
                 </ul>
             </div>
         </div>
 
-        <div class="layui-body">
+        <div class="layui-body" id="main">
             <!-- 内容主体区域 -->
-            @RenderBody()
+            @RenderBody() @*//这句话的意思就是 谁用到我母版页 谁就得把你自己的内容放在里面*@
         </div>
 
     </div>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Scripts/layui.js"></script>
     <script src="~/Scripts/layui.all.js"></script>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    <script>
+        $(function () {
+            $(".sideBar li").map((i, v) => {
+                if ($(v).children(`a[href = '${window.location.pathname}']`).length > 0) {
+                    $(v).addClass("layui-this");
+                }
+            });
+            $(".add-color").map((i, m) => {
+                if ($(m).children(`a[href='${window.location.pathname}'`).length > 0) {
+                    $(m).addClass("layui-this");
+                }
+            });
+       
+        })
+
+    </script>
+
+        
 </body>
 </html>
 

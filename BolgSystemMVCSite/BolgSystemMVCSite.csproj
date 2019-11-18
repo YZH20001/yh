@@ -142,7 +142,8 @@
     <Compile Include="Models\ArticleViewModels\CreateCommentViewModel.cs" />
     <Compile Include="Models\ArticleViewModels\EditArticle.cs" />
     <Compile Include="Models\ArticleViewModels\RemoveArticleViewModels.cs" />
-    <Compile Include="Models\UserViewModels\ChangeInformation.cs" />
+    <Compile Include="Models\UserViewModels\ChangeInformationViewModel.cs" />
+    <Compile Include="Models\UserViewModels\ChangePassWordViewModel.cs" />
     <Compile Include="Models\UserViewModels\LoginViewModel.cs" />
     <Compile Include="Models\UserViewModels\Register.cs" />
     <Compile Include="Models\WebSiteInfo.cs" />
@@ -154,10 +155,16 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\categorylist.css" />
+    <Content Include="Content\code.css" />
     <Content Include="Content\details.css" />
     <Content Include="Content\index.css" />
     <Content Include="Content\layui.css" />
     <Content Include="Content\layui.mobile.css" />
+    <Content Include="Content\style.css" />
+    <Content Include="Content\layer.css" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\layui.all.js" />
     <Content Include="Scripts\layui.js" />
     <Content Include="Content\Login.css" />
@@ -187,6 +194,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\regieter.js" />
+    <Content Include="Scripts\sideBar.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -217,6 +225,9 @@
     <Content Include="Views\SideBars\Edit.cshtml" />
     <Content Include="Views\SideBars\Index.cshtml" />
     <Content Include="Views\Shared\Navbar.cshtml" />
+    <Content Include="Views\Home\ChangePassWord.cshtml" />
+    <Content Include="Views\Home\UserList.cshtml" />
+    <Content Include="Views\Home\ChangeInformation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

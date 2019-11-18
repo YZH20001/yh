@@ -1,4 +1,4 @@
-﻿using BlogSystem.BLL;
+﻿ using BlogSystem.BLL;
 using BlogSyster.DAL;
 using BolgSystemMVCSite.Fillters;
 using BolgSystemMVCSite.Models.ArticleViewModels;
@@ -81,7 +81,6 @@ namespace BolgSystemMVCSite.Controllers
             return View(articles);
         }
         [HttpGet]
-
         public async Task<ActionResult> AritcleList2(int pageIndex = 1, int pageSize = 7)
         {
             //需要给页面前端 总页面数，当前页面，可显示的总页面数
