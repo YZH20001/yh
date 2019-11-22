@@ -40,6 +40,10 @@ namespace BolgSystemMVCSite.Controllers
             ModelState.AddModelError(key: "", errorMessage: "您的信息有误!");
             return View(model);
         }
+        /// <summary>
+        /// 列表
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<ActionResult> CategoryList()
         {

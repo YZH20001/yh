@@ -5,100 +5,137 @@
     ViewBag.Title = "ArticleDetails";
 }
 <h2>文章详情</h2>
+<style>
+    #btnLike {
+        width: 51%;
+        height: 7%;
+        float: left;
+        margin-left: -62px;
+        background-image: url('../../Images/点赞.png');
+    }
 
+    #bad-like {
+        width: 51%;
+        height: 7%;
+        background-image: url('../../Images/反对.png');
+    }
+
+    ol {
+        width: 50%;
+    }
+</style>
 <div>
-        <dl class="dl-horizontal table-bordered">
-            <dt>
-                @Html.DisplayNameFor(model => model.Title)
-            </dt>
+    <dl class="dl-horizontal table-bordered">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Title)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.Content)
-            </dt>
+        <dt>
+            @Html.DisplayNameFor(model => model.Content)
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Content)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.Content)
+        </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.CreateTime)
-            </dt>
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateTime)
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.CreateTime)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.CreateTime)
+        </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.Email)
-            </dt>
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.Email)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.GoodCount)
-            </dt>
+        <dt>
+            @Html.DisplayNameFor(model => model.GoodCount)
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.GoodCount)
-            </dd>
+        <dd>
+            @Html.DisplayFor(model => model.GoodCount)
+        </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.BadCount)
-            </dt>
+        <dt>
+            @Html.DisplayNameFor(model => model.BadCount)
+        </dt>
 
-            <dd>
-                @Html.DisplayFor(model => model.BadCount)
-            </dd>
-
-            @*<dt>
-                @Html.DisplayNameFor(model => model.ImagePath)
-            </dt>
-
-            <dt>
-                类别
-            </dt>
-
+        <dd>
+            @Html.DisplayFor(model => model.BadCount)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ImagePath)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ImagePath)
+        </dd>
+        <dt>
+            类别
+        </dt>
+        <dd>
             @foreach (var item in Model.CategoryNames)
             {
-                <dd class="CategoryNames">
-                    @item
-                </dd>
-            }*@
-        </dl>
-</div>
-<div class="txtComment">
-    <input type="text" name="txtComment" id="txtComment" value="" />
-    <button onclick="addComment()">添加评论</button>
-</div>
 
-<p>
-    <div class="btn_wrap">
-        <div id="likeBox" style="height:20px;"></div>
-        <button onclick="btnGoodHandler(this)" id="btnLike" class="layui-btn layui-btn-normal">点赞</button>
-        <button onclick="btnBadHandler(this)">反对</button>
+                @item
+
+            }
+        </dd>
+
+    </dl>
     </div>
-    <br />
-    @Html.ActionLink("编辑", "EditArticle", new { id = Model.Id }) |
-    @Html.ActionLink("返回上一列", "AritcleList2")
-</p>
-<ol>
-    @foreach (var comment in ViewBag.Comments)
-    {
-        <li>
-            <span>@comment.Content</span>
-            <br />
-            <span>@comment.Email @comment.CreateTime</span>
-        </li>
+    <div class="txtComment">
+        <input type="text" name="txtComment" id="txtComment" value="" />
+        <button onclick="addComment()" class="layui-btn">添加评论</button>
+    </div>
+
+    <p>
+        <div class="btn_wrap">
+            <div onclick="btnGoodHandler(this)" id="btnLike">
+
+            </div>
+            <div onclick="btnBadHandler(this)" id="bad-like">
+
+            </div>
+        </div>
+        <br />
+        @Html.ActionLink("编辑", "EditArticle", new { id = Model.Id }) |
+        @Html.ActionLink("返回上一列", "AritcleList2")
+    </p>
+    <ol>
+        @foreach (var comment in ViewBag.Comments)
+        {
+            <li>
+                <span>@comment.Content</span>
+                <br />
+                <span>@comment.Email @comment.CreateTime</span>
+            </li>
+        }
+    </ol>
+    <script>
+    //1获取操作元素
+    var btnLike = document.querySelector("#btnLike"),
+        badLike = document.querySelector("#bad-like");
+    init();
+    function init() {
+        btnLike.addEventListener("click", clickGoodHandel);
+          badLike.addEventListener("click", clickBadHandel);
     }
-</ol>
-<script src="~/Scripts/articledetails.js"></script>
-<script>
+    function clickGoodHandel() {
+        btnLike.style.backgroundImage = 'url("../../Images/点赞 (1).png")';
+    }
+     function clickBadHandel() {
+        badLike.style.backgroundImage = 'url("../../Images/反对 (2).png")';
+    }
         var articleId = '@Model.Id';
         function btnGoodHandler(btn) {
             $.ajax({
@@ -114,7 +151,7 @@
                 url: "/Article/BadCount/"+articleId,
                 type: "post"
             }).done(() => {
-                alert("反对成功");
+                //alert("反对成功");
                 btn.disabled = true;
             });
         }
@@ -132,6 +169,6 @@
                 location.reload();
             });
     }
-</script>
+    </script>
 
 

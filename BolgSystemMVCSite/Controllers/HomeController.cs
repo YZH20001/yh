@@ -95,6 +95,20 @@ namespace BolgSystemMVCSite.Controllers
             }
             return View(model);
         }
+        [BlogSystemAuth]
+        [HttpGet]
+        public async Task<ActionResult> UserList(int pageIndex = 1, int pageSize = 3)
+        {
+            //需要给页面前端 总页面数，当前页面，可显示的总页面数
+            var userMgr = new UserManager();
+            var userId = Guid.Parse(Session["userId"].ToString());
+            //当前用户第n页数据
+            var useres = await userMgr.GetAllUsersByuserId(userId, pageIndex - 1, pageSize);
+            //获取当前文章总数
+            var dataCount = await userMgr.GetDataCount(userId);
+            return View(new PagedList<BlogSystem.Dto.UserDto>(useres, pageIndex, pageSize, dataCount));
+        }
+
         [HttpGet]
         public  ActionResult ChangePassWord()
         {
@@ -111,22 +125,9 @@ namespace BolgSystemMVCSite.Controllers
             }
             return View(model);
         }
-        //[HttpGet]
-        //public async Task<ActionResult> ChangeInformation(string email)
-        //{
-        //    BlogSystem.IBLL.IUserManager userManager = new UserManager();
-        //    var data = await userManager.GetUserEmail(email);
-        //    return View(new Models.ChangeInformationViewModel()
-        //    {
-        //       Email=data.Email,
-        //       SiteName=data.SiteName,
-        //       ImagePath=data.ImagePath,
-        //    });
-        //}
         [HttpGet]
         public ActionResult ChangeInformation()
         {
-           
             return View();
         }
         [HttpPost]

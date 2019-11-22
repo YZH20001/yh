@@ -65,14 +65,16 @@
                 <tr>
                     <td colspan="6">
                         <nav>
-                            @Html.Pager(Model, new PagerOptions { 
+                            @Html.Pager(Model, new PagerOptions
+                            {
                            PageIndexParameterName = "pageIndex",
                            ContainerTagName = "ul",
-                           CssClass = "pagination", 
+                           CssClass = "pagination",
                            CurrentPagerItemTemplate = "<li class=\"active\"><a href=\"#\">{0}</a></li>",
-                           DisabledPagerItemTemplate = "<li class=\"disabled\"><a>{0}</a></li>", 
+                           DisabledPagerItemTemplate = "<li class=\"disabled\"><a>{0}</a></li>",
                            PagerItemTemplate = "<li>{0}</li>",
-                           Id = "bootstrappager" })
+                           Id = "bootstrappager"
+                            })
                         </nav>
                     </td>
                 </tr>
@@ -83,12 +85,14 @@
 <script src="~/Scripts/index.js"></script>
 <style>
     .table {
-    border-collapse: separate;
-    border-spacing: 0;
-}
-    tbody{
-        text-align:center;
+        border-collapse: separate;
+        border-spacing: 0;
     }
+
+    tbody {
+        text-align: center;
+    }
+
     .pagination {
         display: flex;
         flex-direction: row;
@@ -96,27 +100,34 @@
         margin: 0;
         padding: 3px;
     }
-    h1{
-        text-align:center;
-        font-weight:bold;
+
+    h1 {
+        text-align: center;
+        font-weight: bold;
     }
-    p{
-        font-size:16px;
+
+    p {
+        font-size: 16px;
     }
-    p a{
-        color:cyan;
-    }
-   .pagination li {
-            margin-right: 10px;
+
+        p a {
+            color: cyan;
         }
-  .pagination li:hover {
-                background-color: springgreen;
-            }
-   .layui-header{
-        position:relative;
-        top:-20px;
+
+    .pagination li {
+        margin-right: 10px;
     }
+
+        .pagination li:hover {
+            background-color: springgreen;
+        }
+
+    .layui-header {
+        position: relative;
+        top: -20px;
+    }
+
 </style>
 
 @section scripts{
- }
+}

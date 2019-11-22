@@ -19,7 +19,8 @@ namespace BlogSystem.IBLL
         Task ChangeInformation(string email, string SiteName, string ImagePath);
 
         Task <Dto.UserInformationDto >GetUserEmail(string emali);
-
+        Task<int> GetDataCount(Guid userId);
         Task<List<Dto.UserDto>> GetAllUsersByuserId(Guid userId, int pageIndex, int pagesize);
+       
     }
 }

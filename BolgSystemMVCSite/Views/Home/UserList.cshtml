@@ -1,58 +1,197 @@
-﻿@model IEnumerable<BlogSystem.Dto.UserDto>
-
+﻿@using Webdiyer.WebControls.Mvc
+@model Webdiyer.WebControls.Mvc.PagedList<BlogSystem.Dto.UserDto>
 @{
     ViewBag.Title = "UserList";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>UserList</h2>
+<h1>用户管理列表</h1>
+<link href="~/Content/index.css" rel="stylesheet" />
+<link href="~/Content/categorylist.css" rel="stylesheet" />
+<link href="~/Content/demo.css" rel="stylesheet" />
+<style>
+    .table {
+        border-collapse: separate;
+        border-spacing: 0;
+    }
 
+    tbody {
+        text-align: center;
+    }
+
+    .pagination {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        margin: 0;
+        padding: 3px;
+    }
+
+    h1 {
+        text-align: center;
+        font-weight: bold;
+    }
+
+    p {
+        font-size: 16px;
+    }
+
+        p a {
+            color: cyan;
+        }
+
+    .pagination li {
+        margin-right: 10px;
+    }
+
+        .pagination li:hover {
+            background-color: springgreen;
+        }
+
+    .layui-header {
+        position: relative;
+        top: -20px;
+    }
+
+    .form-center {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+</style>
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("注册", "Regieter")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ImagePath)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FansCount)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FocusCount)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SiteName)
-        </th>
-        <th></th>
-    </tr>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ImagePath)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FansCount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FocusCount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SiteName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ImagePath)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FansCount)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FocusCount)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SiteName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
-
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ImagePath)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FansCount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FocusCount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SiteName)
+                </td>
+                <td class="list-wrap">
+                    <a href="javascript:" class="btn-edit">编辑</a> |
+                    @Html.ActionLink("删除", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="6">
+                <nav>
+                    @Html.Pager(Model, new PagerOptions
+                    {
+                   PageIndexParameterName = "pageIndex",
+                   ContainerTagName = "ul",
+                   CssClass = "pagination",
+                   CurrentPagerItemTemplate = "<li class=\"active\"><a href=\"#\">{0}</a></li>",
+                   DisabledPagerItemTemplate = "<li class=\"disabled\"><a>{0}</a></li>",
+                   PagerItemTemplate = "<li>{0}</li>",
+                   Id = "bootstrappager"
+                    })
+                </nav>
+            </td>
+        </tr>
+    </tfoot>
 </table>
+<div id="gb"></div>
+<!--编辑框-->
+<div class="d1">
+    <div class="title">
+        编辑用户
+        <a href="javascript:;" class="close">X</a>
+    </div>
+    <form action="/Home/ChangeInformation" method="post" class="form-center">
+        <input name="__RequestVerificationToken" type="hidden" value="9o_wUyOML51hr-ldnZlcjYHQ21oeJmND80CimFvoQaRUEYQGVebJfxaTmPoLPCtiZuskpKPoC8USa47sRPb8u-Q0b9FOdkzmb-jBiZn7_gk1" />    <div class="form-horizontal">
+            <hr />
+            <div class="form-group">
+                <label class="control-label col-md-2" for="Email">邮箱</label>
+                <div class="col-md-10">
+                    <input class="form-control text-box single-line" data-val="true" data-val-email="邮箱 字段不是有效的电子邮件地址。" id="Email" name="Email" type="email" value="" />
+                    <span class="field-validation-valid text-danger" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2" for="SiteName">匿名</label>
+                <div class="col-md-10">
+                    <input class="form-control text-box single-line" id="SiteName" name="SiteName" type="text" value="" />
+                    <span class="field-validation-valid text-danger" data-valmsg-for="SiteName" data-valmsg-replace="true"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2" for="ImagePath">头像</label>
+                <div class="col-md-10">
+                    <input class="form-control text-box single-line" id="ImagePath" name="ImagePath" type="text" value="" />
+                    <span class="field-validation-valid text-danger" data-valmsg-for="ImagePath" data-valmsg-replace="true"></span>
+
+                    <input type="file" onchange='PreviewImage(this)' class="layui-btn layui-btn-primary" id="LAY_avatarUpload" value="上传图片" />
+                </div>
+                <script>
+                    function PreviewImage(imgFile) {
+                        var pattern = /(\.*.jpg$)|(\.*.png$)|(\.*.jpeg$)|(\.*.gif$)|(\.*.bmp$)/;
+                        if (!pattern.test(imgFile.value)) {
+                            alert("系统仅支持jpg/jpeg/png/gif/bmp格式的照片！");
+                            imgFile.focus();
+                        } else {
+                            var path;
+                            if (document.all) {//IE
+                                imgFile.select();
+                                path = document.selection.createRange().text;
+                                document.getElementById("ImagePath").innerHTML = "";
+                                document.getElementById("ImagePath").style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(enabled='true',sizingMethod='scale',src=\"" + path + "\")";//使用滤镜效果
+                            } else {//FF
+                                path = URL.createObjectURL(imgFile.files[0]);
+                                document.getElementById("ImagePath").value = path;
+                            }
+                        }
+                        console.log(path)
+                    }
+                </script>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="确认修改" class="layui-btn" />
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script src="~/Scripts/demo.js"></script>
+<script src="~/Scripts/jquery.js"></script>

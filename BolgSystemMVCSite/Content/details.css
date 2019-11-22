@@ -3,10 +3,11 @@
     float: right;
 }
 .btn_wrap {
+    width: 10rem;
     margin-right: 10px;
 }
 .txtComment {
-    margin-top: 31px;
+    margin-top: 8px;
 }
 .likeWrap {
     position: relative;

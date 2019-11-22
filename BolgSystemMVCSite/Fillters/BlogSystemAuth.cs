@@ -20,8 +20,8 @@ namespace BolgSystemMVCSite.Fillters
                 filterContext.HttpContext.Session["loginName"] = filterContext.HttpContext.Request.Cookies["loginName"].Value;
                 filterContext.HttpContext.Session["userId"] = filterContext.HttpContext.Request.Cookies["userId"].Value;
             }
-            if (!(filterContext.HttpContext.Session["loginName"]!=null||filterContext.HttpContext.Request.Cookies
-                ["loginName"] != null))
+            if (!(filterContext.HttpContext.Session["loginName"]!=null||
+                  filterContext.HttpContext.Request.Cookies["loginName"] != null))
             {
                 filterContext.Result = new RedirectToRouteResult(new System.Web.Routing.RouteValueDictionary()
                 {

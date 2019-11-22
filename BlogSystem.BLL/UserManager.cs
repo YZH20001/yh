@@ -18,7 +18,7 @@ namespace BlogSystem.BLL
         {
             using (IdAL.IUserService userService = new BlogSyster.DAL.UserService())
             {
-                    var user = await userService.GetAllAsync().FirstAsync(m => m.Email == email);
+             var user = await userService.GetAllAsync().FirstAsync(m => m.Email == email);
                 user.SiteName = siteName;
                 user.ImagePath = imagePath;
               await userService.EditAsync(user);
@@ -38,9 +38,29 @@ namespace BlogSystem.BLL
             }
         }
 
-        public Task<List<UserDto>> GetAllUsersByuserId(Guid userId, int pageIndex, int pagesize)
+        public async Task<List<UserDto>> GetAllUsersByuserId(Guid userId, int pageIndex, int pagesize)
         {
-            throw new NotImplementedException();
+            using (var userSvc = new UserService())
+            {
+                var list = await userSvc.GetAllByPageOrderAsync(pagesize, pageIndex, false)
+                      .Select(m => new Dto.UserDto()
+                      {
+                         Id=m.Id,
+                         Email=m.Email,
+                         FansCount=m.FansCount,
+                         FocusCount=m.FocusCount,
+                         SiteName=m.SiteName,
+                      }).ToListAsync();
+                return list;
+            }
+        }
+
+        public async Task<int> GetDataCount(Guid userId)
+        {
+            using (BlogSystem.IdAL.IUserService userService = new UserService())
+            {
+                return await userService.GetAllAsync().CountAsync();
+            }
         }
 
         public async Task<UserInformationDto> GetUserEmail(string email)
@@ -56,7 +76,7 @@ namespace BlogSystem.BLL
                         FansCount = m.FansCount,
                         ImagePath = m.ImagePath,
                         SiteName = m.SiteName,
-                        FocusCount = m.FocusCount,
+                        FocusCount = m.FocusCount
                     }).FirstAsync();
                 }
                 else
@@ -94,7 +114,7 @@ namespace BlogSystem.BLL
               { Email = email,
                   Password = password, 
                   SiteName = "默认的小站", 
-                  ImagePath ="default.png"
+                  ImagePath ="e7e52a7969654a43b9aac9be96be4736.jpeg"
               });
             }
         }

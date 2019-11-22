@@ -152,10 +152,10 @@ namespace BlogSystem.BLL
         {
             using (var articleSvc = new ArticleService())
             {
-                var list = await articleSvc.GetAllByPageOrderAsync(pagesize, pageIndex, false).Include(m => m.User).Where(m => m.UseId == userId)
+                var list = await articleSvc.GetAllByPageOrderAsync(pagesize, pageIndex, false).Include(m =>m.User).Where(m => m.UseId == userId)
                       .Select(m => new Dto.ArticleDto()
                       {
-                          Title = m.Title,
+                          Title=m.Title,
                           BadCount = m.BadCount,
                           GoodCount = m.GoodCount,
                           Content = m.Content,
@@ -176,6 +176,7 @@ namespace BlogSystem.BLL
                 }
             }
         }
+        //列表
         public async Task<List<BlogCategoryDto>> GetAllCategories(Guid userId)
         {
             using (IdAL.IBlogCategory blogCategory = new BlogCategoryServices())
@@ -187,9 +188,6 @@ namespace BlogSystem.BLL
                 }).ToListAsync();
             }
         }
-
-
-
         public async Task<int> GetDataCount(Guid userId)
         {
             using (BlogSystem.IdAL.IArticleService articleService = new ArticleService())
@@ -240,9 +238,6 @@ namespace BlogSystem.BLL
         {
             using (BlogSystem.IdAL.IArticleService articleService = new ArticleService())
             {
-                //var article= await articleService.GetAllAsync().AnyAsync(predicate: m => m.Id == articleId);
-                //if (article)
-                //{
                 var articles = await articleService.GetOneByIdAsync(articleId);
                 await articleService.RemoveAsync(articles);
 
