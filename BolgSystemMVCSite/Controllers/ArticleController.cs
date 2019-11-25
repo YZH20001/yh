@@ -1,4 +1,5 @@
-﻿ using BlogSystem.BLL;
+﻿using BlogSystem;
+using BlogSystem.BLL;
 using BlogSyster.DAL;
 using BolgSystemMVCSite.Fillters;
 using BolgSystemMVCSite.Models.ArticleViewModels;
@@ -12,6 +13,7 @@ using Webdiyer.WebControls.Mvc;
 
 namespace BolgSystemMVCSite.Controllers
 {
+   
     [BlogSystemAuth]
     public class ArticleController : Controller
     {
@@ -187,6 +189,35 @@ namespace BolgSystemMVCSite.Controllers
             BlogSystem.IBLL.IArticleManager articleManager = new ArticleManager();
             await articleManager.CreateComment(userid, model.Id, model.Content);
             return Json(new { result = "ok" });
+        }
+        public ViewResult AritcleList2(string sortOrder, string searchString)
+        {
+            BlogContent blogContent = new BlogContent();
+            ViewBag.FirstNameSortParm = String.IsNullOrEmpty(sortOrder) ? "first_desc" : "";
+            ViewBag.LastNameSortParm = sortOrder == "last" ? "last_desc" : "last";
+            var workers = from w in blogContent.Artciles
+                          select w;
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                workers = workers.Where(w => w.Title.Contains(searchString)
+                                        || w.Title.Contains(searchString));
+            }
+            switch (sortOrder)
+            {
+                case "first_desc":
+                    workers = workers.OrderByDescending(w => w.Id);
+                    break;
+                case "last_desc":
+                    workers = workers.OrderByDescending(w => w.Title);
+                    break;
+                case "last":
+                    workers = workers.OrderBy(w => w.UseId);
+                    break;
+                default:
+                    workers = workers.OrderBy(w => w.IsRemove);
+                    break;
+            }
+            return View(workers.ToList());
         }
     }
 }
